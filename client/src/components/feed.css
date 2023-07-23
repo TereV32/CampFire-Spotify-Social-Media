@@ -1,0 +1,11 @@
+#centeredDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff; /* White background */
+    color: #333333; /* Dark text color for better contrast */
+    padding: 20px; /* Add some padding to make it visually appealing */
+    border-radius: 8px; /* Rounded corners for a smoother look */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a subtle shadow effect */
+  }

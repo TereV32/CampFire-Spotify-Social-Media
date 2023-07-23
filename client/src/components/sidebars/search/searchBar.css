@@ -1,0 +1,11 @@
+#searchBarContainer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    min-height: 100px;
+    display: flex;
+    background-color: #040404;
+    z-index: 999x;
+    min-width:700px
+  }

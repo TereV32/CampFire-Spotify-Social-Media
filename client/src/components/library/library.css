@@ -1,0 +1,28 @@
+#library-container {
+    width: max-content;
+    /* height: 100%; */
+    display: flex;
+    flex-wrap: wrap;
+    /* overflow-y: auto; */
+    justify-content: space-between;
+    background-color: #040404;
+    margin-left: 10px;
+}
+
+#library-group {
+    width: 100%;
+}
+
+#library-item {
+    width: 100%;
+    height: 10%;
+}
+
+#playlist-list {
+    min-width: max-content;
+}
+
+#song-col {
+    margin-bottom: -62px;
+    margin-inline: 17px;
+}

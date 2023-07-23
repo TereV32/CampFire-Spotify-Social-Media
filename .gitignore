@@ -1,0 +1,10 @@
+# Node.js / npm
+node_modules
+npm-debug.log
+yarn-error.log
+
+# Build artifacts
+/client/build
+
+# Environment variables
+.env
