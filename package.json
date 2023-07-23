@@ -1,6 +1,7 @@
 {
   "engines": {
-    "node": "20.x"
+    "node": "20.x",
+    "npm": "9.x"
   },
   "name": "campfire",
   "version": "0.1.0",
@@ -29,7 +30,7 @@
     "qs": "^6.11.2"
   },
   "scripts": {
-    "start": "cd server && node index.js",
+    "start": "node server/index.js",
     "build": "cd client && npm install && npm run build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
