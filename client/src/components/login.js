@@ -12,7 +12,7 @@ import { spotifyLogin } from '../spotify';
 export default function Login() {
 
     async function handleLogin() {
-        await axios.get('http://localhost:3001/login')
+        await axios.get('https://campfire-1f3fc409de5e.herokuapp.com/login')
             .then((respose) => {
                 window.location.href = respose.data.spotifyUrl
             }) // Initiate the login process by redirecting to the backend /login route
