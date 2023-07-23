@@ -3,6 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const spotifyRouter = require('./routes/spotifyRouter')
 const mongoose = require('mongoose')
+const path = require('path');
 require('dotenv/config');
 
 const app = express()
