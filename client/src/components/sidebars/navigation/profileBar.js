@@ -13,8 +13,7 @@ import {
 import '../navigation/profileBar.css'
 import BarButtons from '../barButtons'
 import axios from 'axios'
-import CreatePost from '../../createPost'
-
+import baseUrl from '../../../config'
 
 export default function ProfileBar() {
 
@@ -60,7 +59,7 @@ export default function ProfileBar() {
             setAuthCode(code);
             console.log(code)
 
-            await axios.post('http://localhost:3001/', { code })
+            await axios.post(`${baseUrl}/`, { code })
                 .then((response) => {
                     setTime(Date.now())
                     console.log(response.data)
@@ -97,7 +96,7 @@ export default function ProfileBar() {
     }
 
     async function getUserProfile() {
-        await axios.get('http://localhost:3001/profile')
+        await axios.get(`${baseUrl}/profile`)
             .then((response) => {
                 console.log(response.data)
                 setDisplayName(response.data.display_name)
