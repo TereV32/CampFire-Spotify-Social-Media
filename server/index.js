@@ -7,21 +7,23 @@ const path = require('path');
 require('dotenv/config');
 
 const app = express()
-// Serve the static files from the React app
-app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Any other routes or middleware can go here
+if (process.env.NODE_ENV === 'production') {
+    // Serve the static files from the React app
+    app.use(express.static(path.join(__dirname, '../client/build')));
 
-// Catch-all route to serve the React app
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+    // Any other routes or middleware can go here
 
+    // Catch-all route to serve the React app
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/build/index.html'));
+    });
+}
 
 const uri = process.env.DB_URI
 
 app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended:false}))
+app.use(bodyParser.urlencoded({ extended: false }))
 
 const corsOption = {
     origin: '*',
@@ -33,13 +35,13 @@ app.use(cors(corsOption))
 app.use('/', spotifyRouter)
 
 //DB Connection
-mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
-.then(() => {
-    console.log("DB Connected")
-})
-.catch((err) => {
-    console.log(err)
-})
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+    .then(() => {
+        console.log("DB Connected")
+    })
+    .catch((err) => {
+        console.log(err)
+    })
 
 const port = process.env.PORT || 3001
 const server = app.listen(port, () => {

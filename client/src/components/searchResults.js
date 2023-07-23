@@ -9,6 +9,7 @@ import {
 } from 'react-bootstrap'
 import { Search } from 'react-bootstrap-icons'
 import ProfilePage from './profilePage'
+import baseUrl from '../config'
 
 export default function SearchResults() {
 
@@ -23,7 +24,7 @@ export default function SearchResults() {
     const [getProfile, setGetProfile] = useState('')
 
     async function search() {
-        await axios.get('http://localhost:3001/search', { params: { input: inputMusic } })
+        await axios.get(`${baseUrl}/search`, { params: { input: inputMusic } })
             .then((response) => {
                 console.log(response.data)
                 setSearchResults(response.data.albums.items)
@@ -37,7 +38,7 @@ export default function SearchResults() {
         setUserSearch([]);
         setUserInfo([]);
         try {
-            const response = await axios.get('http://localhost:3001/searchUsers', { params: { input: inputUser } });
+            const response = await axios.get(`${baseUrl}/searchUsers`, { params: { input: inputUser } });
             setUserSearch(response.data);
 
             // Fetch user information for each user found in the search
@@ -50,7 +51,7 @@ export default function SearchResults() {
 
     async function getSearchUsersInfo(href, i) {
         try {
-            const response = await axios.get('http://localhost:3001/spotifyUser', { params: { href } });
+            const response = await axios.get(`${baseUrl}/spotifyUser`, { params: { href } });
             const userData = {
                 index: i,
                 username: response.data.display_name,
@@ -68,7 +69,7 @@ export default function SearchResults() {
         try {
             // Fetch user information for each user found in the search
             // const response = await axios.get('http://localhost:3001/spotifyUser', { params: { href } });
-            const playlistResponse = await axios.get('http://localhost:3001/usersPlaylist', { params: { id } })
+            const playlistResponse = await axios.get(`${baseUrl}/usersPlaylist`, { params: { id } })
             const userProfile = {
                 playlists: playlistResponse.data.items,
                 displayName: username,

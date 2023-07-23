@@ -10,6 +10,7 @@ import {
   Col,
 } from 'react-bootstrap'
 import '../library/library.css'
+import baseUrl from '../../config'
 
 export default function Library() {
 
@@ -22,7 +23,7 @@ export default function Library() {
   }, [])
 
   async function getUserPlaylists() {
-    await axios.get('http://localhost:3001/library')
+    await axios.get(`${baseUrl}/library`)
       .then((response) => {
         console.log(response.data)
         setPlaylists(response.data.items)
@@ -33,7 +34,7 @@ export default function Library() {
   }
 
   async function getPlaylistData(key) {
-    await axios.get('http://localhost:3001/playlist', { params: { key } })
+    await axios.get(`${baseUrl}/playlist`, { params: { key } })
       .then((response) => {
         console.log(response.data)
         setSongs(response.data.items)

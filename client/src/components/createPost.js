@@ -6,6 +6,7 @@ import {
     Dropdown,
     Button
 } from 'react-bootstrap'
+import baseUrl from '../config'
 
 export default function CreatePost({ closeOpen }) {
 
@@ -17,7 +18,7 @@ export default function CreatePost({ closeOpen }) {
     // const handleShow = () => setShow(true)
 
     async function search() {
-        await axios.get('http://localhost:3001/search', { params: { input: inputSearch } })
+        await axios.get(`${baseUrl}/search`, { params: { input: inputSearch } })
             .then((response) => {
                 console.log(response.data)
                 // onSearch(input)

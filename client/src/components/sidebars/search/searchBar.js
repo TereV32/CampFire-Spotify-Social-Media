@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import SearchResults from '../../searchResults'
 import { Link } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+import baseUrl from '../../../config'
 
 export default function SearchBar() {
 
@@ -11,7 +12,7 @@ export default function SearchBar() {
     const [goLink, setLink] = useState('')
 
     async function search() {
-        await axios.get('http://localhost:3001/search', { params: { input } })
+        await axios.get(`${baseUrl}/search`, { params: { input } })
             .then((response) => {
                 console.log(response.data)
                 setSearchResults(response.data.albums.items)

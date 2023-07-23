@@ -10,6 +10,7 @@ import {
     Repeat,
     VolumeUp
 } from 'react-bootstrap-icons'
+import baseUrl from '../../../config'
 import '../currentlyPlaying/playingBar.css'
 
 export default function PlayingBar() {
@@ -42,7 +43,7 @@ export default function PlayingBar() {
 
     async function webPlayback() {
 
-        const response = await axios.get('http://localhost:3001/getAccessToken')
+        const response = await axios.get(`${baseUrl}/getAccessToken`)
         const accessCode = response.data.authCode
 
         const script = document.createElement("script");

@@ -81,7 +81,7 @@ export default function ProfileBar() {
             setAuthCode(code);
             console.log(code)
 
-            await axios.post('http://localhost:3001/refresh_token', { code })
+            await axios.post(`${baseUrl}/refresh_token`, { code })
                 .then((response) => {
                     setTime(Date.now())
                     console.log(response.data)

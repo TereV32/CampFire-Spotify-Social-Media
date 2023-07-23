@@ -3,7 +3,6 @@ import axios from 'axios';
 import {
   Button,
   Container,
-  Modal,
   Form,
   Dropdown,
   Alert,
@@ -11,22 +10,7 @@ import {
 } from 'react-bootstrap';
 import { PlusSquare } from 'react-bootstrap-icons';
 import '../components/feed.css'
-
-
-const MyModel = (props) =>
-(<Modal show={props.isHidden} onHide={props.onClose} style={{ backgroundColor: '#FF00000' }}>
-  <Modal.Header closeButton>
-    <Modal.Title>Translations</Modal.Title>
-  </Modal.Header>
-  <Modal.Body>
-    <h4>Filter:</h4>
-    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula.</p>
-    <hr />
-  </Modal.Body>
-  <Modal.Footer>
-    <Button onClick={props.onClose}>Close</Button>
-  </Modal.Footer>
-</Modal>);
+import baseUrl from '../config'
 
 
 export default function Feed() {
@@ -49,7 +33,7 @@ export default function Feed() {
 
 
   async function getPost() {
-    await axios.get('http://localhost:3001/seePost')
+    await axios.get(`${baseUrl}/seePost`)
       .then(response => {
         setAllPost(response.data)
         console.log(response.data[0].content)
@@ -99,12 +83,12 @@ export default function Feed() {
 
   async function savePost() {
     console.log(songSelected)
-    const response = await axios.post('http://localhost:3001/savePost', { songNum: songSelected.trackId, message: inputMessage, time: Date.now() })
+    const response = await axios.post(`${baseUrl}/savePost`, { songNum: songSelected.trackId, message: inputMessage, time: Date.now() })
   }
 
 
   async function search() {
-    await axios.get('http://localhost:3001/search', { params: { input: inputSearch } })
+    await axios.get(`${baseUrl}/search`, { params: { input: inputSearch } })
       .then((response) => {
         console.log(response.data)
         setSearchResults(response.data.tracks.items)
