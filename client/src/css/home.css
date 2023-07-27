@@ -1,12 +1,12 @@
 .app-container {
     display: flex;
-    margin-left: -36px;
+    margin-left: -7px;
     height: 100vh;
+    background-color: #020202;
 }
 
 .profile-bar {
-    width: 18vh;
-    background-color: #242424;
+    width: 13%;
 }
 
 .main-body {

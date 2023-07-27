@@ -33,7 +33,7 @@ router.get('/login', (req, res) => {
     const state = generateRandomString(16)
     res.cookie(stateKey, state)
 
-    const scope = ["user-library-read", "playlist-read-private", "streaming"];
+    const scope = ["user-library-read", "playlist-read-private", "streaming", "user-modify-playback-state", "user-read-playback-state"];
 
     const searchParams = `client_id=${CLIENT_ID}&` +
         `response_type=code&` +
@@ -227,7 +227,7 @@ router.get('/spotifyUser', (req, res) => {
 })
 
 router.post('/savePost', (req, res) => {
-    const {songNum, message , time} = req.body
+    const { name, artists, id, message, time, albumUri } = req.body
 
     axios.get('https://api.spotify.com/v1/me', {
         headers: {
@@ -238,7 +238,7 @@ router.post('/savePost', (req, res) => {
             res.json(response.data);
             console.log(response.data)
 
-            const postData = { userID: response.data.id, content: message, songID: songNum, timeStamp: time }
+            const postData = { userID: response.data.id, userPic: response.data.images[1].url, content: message, songName: name, songArtists: artists, songID: id, timeStamp: time, albumUri: albumUri }
             console.log(postData)
             const post = new schemas.PostSchema(postData)
             try {
@@ -268,6 +268,67 @@ router.get('/seePost', async (req, res) => {
         console.error('Error getting post:', error);
         res.status(500).json({ message: 'An error occurred while getting post.' });
     }
+})
+
+router.get('/getTrack', (req, res) => {
+    const trackID = req.query.trackID
+    const formatted = spotifyTrackURI.split(':')[2].replace(/:/g, '%3A');
+    console.log(formatted)
+    axios.get(`https://api.spotify.com/v1/tracks/${formatted}`, {
+        headers: {
+            Authorization: `${token_type} ${access_token}`
+        }
+    })
+        .then(async response => {
+            res.json(response);
+            console.log(response)
+        })
+        .catch(error => {
+            res.json(error);
+        });
+})
+
+router.post('/queue', (req, res) => {
+    const uri = req.body.trackID
+    axios.post('https://api.spotify.com/v1/me/player/queue?uri=' + encodeURIComponent(uri), {
+        headers: {
+            Authorization: `${token_type} ${access_token}`
+        }
+    })
+        .then(async response => {
+            res.json(response.data);
+            console.log(response.data)
+        })
+        .catch(error => {
+            res.json(error);
+            console.log(error)
+        });
+})
+
+
+router.put('/playSong', (req, res) => {
+    const {trackID, albumId } = req.body
+    console.log(trackID + albumId)
+    const data = {
+        context_uri: `${albumId}`,
+        uris: [`${trackID}`],
+        offset: {
+            position: 5,
+        },
+        position_ms: 0,
+    };
+    axios.put(`https://api.spotify.com/v1/me/player/play`, data,
+        {
+            headers: {
+                Authorization: `${token_type} ${access_token}`
+            }
+        })
+        .then((response) => {
+            console.log('Track is now playing:', response.data);
+        })
+        .catch((error) => {
+            console.error('Error playing the track:', error);
+        });
 })
 
 router.get('/usersPlaylist', (req, res) => {

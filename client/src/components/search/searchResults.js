@@ -6,10 +6,12 @@ import {
     Form,
     Row,
     Col,
+    Image
 } from 'react-bootstrap'
 import { Search } from 'react-bootstrap-icons'
-import ProfilePage from './profilePage'
-import baseUrl from '../config'
+import ProfilePage from '../profilePage'
+import baseUrl from '../../config'
+import '../search/searchResults.css'
 
 export default function SearchResults() {
 
@@ -85,8 +87,8 @@ export default function SearchResults() {
 
 
     return (
-        <div style={{ width: '100%' }}>
-            <Container>
+        <div id='search-container' style={{ width: '100%' }}>
+            <Container >
                 <Row>
                     <Col sm={5} style={{ padding: '3px' }}>
                         <Button style={{ margin: '6px' }} onClick={() => search()}>
@@ -111,7 +113,23 @@ export default function SearchResults() {
                     <h3>Search Results</h3>
                     {searchResults?.map((result, i) => (
                         <div key={i} style={{ color: '#ffffff' }}>
-                            <Button>{result.name}</Button>
+                            <Container style={{ height: 'inherit' }}>
+                                <Row style={{ display: 'flex', width: '100%' }}>
+                                    <Col id='song-col'>
+                                        <h6>{i + 1}</h6>
+                                    </Col>
+                                    <Col id='song-col' style={{ marginTop: '10px' }}>
+                                        <Image style={{ height: '5vh', width: '5vh' }} src={result.images[0].url}></Image>
+                                    </Col>
+                                    <Col id='song-col'>
+                                        <h4 style={{ marginBottom: '2px' }}>{result.name}</h4>
+                                        <h6>{result.artists[0].name}</h6>
+                                    </Col>
+                                    <Col id='song-col'>
+                                        <h6 style={{ marginTop: '42px' }}>{result.name}</h6>
+                                    </Col>
+                                </Row>
+                            </Container>
                         </div>
                     ))}
                     {userInfo?.map((result, i) => (
@@ -125,7 +143,7 @@ export default function SearchResults() {
                 </div>
             </Container>
             <Container style={{ flex: '1' }}>
-                <ProfilePage profile={getProfile}/>
+                <ProfilePage profile={getProfile} />
             </Container>
         </div>
     )

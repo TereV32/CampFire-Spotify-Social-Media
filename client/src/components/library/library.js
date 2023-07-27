@@ -48,12 +48,12 @@ export default function Library() {
 
   function displayPlaylist() {
     return (
-      <ListGroup>
+      <ListGroup style={{ width: '25px' }}>
         {songs?.map((item, i) => (
           <ListGroupItem className='playlist-item' key={i} >
             <div className='songList'>
-              <Button className='playlist-button'>
-                <Container>
+              <Button id='playlist-button'>
+                <Container style={{ height: 'inherit' }}>
                   <Row style={{ display: 'flex', width: '100%' }}>
                     <Col id='song-col'>
                       <h6>{i + 1}</h6>
@@ -66,7 +66,7 @@ export default function Library() {
                       <h6>{item.track.artists[0].name}</h6>
                     </Col>
                     <Col id='song-col'>
-                      <h6 style={{ marginTop: '5px' }}>{item.track.album.name}</h6>
+                      <h6 style={{ marginTop: '42px' }}>{item.track.album.name}</h6>
                     </Col>
                   </Row>
                 </Container>
@@ -87,34 +87,32 @@ export default function Library() {
   console.log('library')
   return (
     <Container id='library-container'>
-      <div style={{ display: 'flex' }}>
-        <div style={{ flex: '1' }}>
-          <h1 className="text-center mb-4">Playlists</h1>
-          <ListGroup id='library-group'>
-            {playlists?.map((item, i) => (
-              <ListGroupItem id='library-item' style={{ overflowY: 'auto' }} key={i} >
-                <div>
-                  <Button className='playlist-button' onClick={() => handleClick(item.id)} >
-                    <div>
-                      <Image className='image-cover' src={item.images[0].url}></Image>
-                      <h4>{item.name}</h4>
-                    </div>
-                  </Button>
-                </div>
-              </ListGroupItem>
-            ))
-            }
-          </ListGroup >
-        </div>
-        <div style={{flex: '1'}}>
-          <ListGroup>
-            <div id='playlist-list'>
-              <h1 className='text-center mb-4'>Songs</h1>
-              <div className='playlist-details'>{displayPlaylist()}</div>
-            </div>
-          </ListGroup>
-        </div>
-      </div>
-    </Container>
+      <Container style={{ width: '30%' }}>
+        <h1 className="text-center mb-4">Playlists</h1>
+        <ListGroup id='library-group'>
+          {playlists?.map((item, i) => (
+            <ListGroupItem style={{ overflowY: 'auto' }} key={i} >
+              <div>
+                <Button id='playlist-button' onClick={() => handleClick(item.id)} >
+                  <div id='playlist-div'>
+                    <Image className='image-cover' src={item.images[0].url}></Image>
+                    <h4 id='song-name'>{item.name}</h4>
+                  </div>
+                </Button>
+              </div>
+            </ListGroupItem>
+          ))
+          }
+        </ListGroup >
+      </Container>
+      <Container style={{ width: '70%' }}>
+        <h1 className='text-center mb-4'>Songs</h1>
+        <ListGroup>
+          <div id='playlist-list'>
+            <div className='playlist-details'>{displayPlaylist()}</div>
+          </div>
+        </ListGroup>
+      </Container>
+    </Container >
   );
 };

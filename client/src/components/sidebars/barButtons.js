@@ -10,7 +10,7 @@ export default function BarButtons(props) {
 
 
     return (
-        <Link to={props.to}>
+        <Link to={props.to} style={{textDecoration: 'none'}}>
             <div className={btnClass}>
                 {props.icon}
                 <p>{props.title}</p>

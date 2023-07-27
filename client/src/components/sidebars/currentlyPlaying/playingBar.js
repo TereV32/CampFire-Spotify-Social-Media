@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { Button, Col, Container, Image, Row } from 'react-bootstrap';
 import {
@@ -12,8 +12,9 @@ import {
 } from 'react-bootstrap-icons'
 import baseUrl from '../../../config'
 import '../currentlyPlaying/playingBar.css'
+import TrackContext from '../../../trackContext';
 
-export default function PlayingBar() {
+export default function PlayingBar({ }) {
 
     const track = {
         name: "",
@@ -35,13 +36,23 @@ export default function PlayingBar() {
     const [timeBar, setTimeBar] = useState(0)
     const [code, setCode] = useState('')
 
+    const { selectedTrack } = useContext(TrackContext);
+    console.log(selectedTrack)
+
     useEffect(() => {
-        webPlayback()
+        if (player) {
+            console.log('this is player')
+            setTrack(selectedTrack);
+            console.log()
+        } else {
+            // Otherwise, initialize the player with the selected track
+            webPlayback();
+        }
+
+    }, [selectedTrack]);
 
 
-    }, []);
-
-    async function webPlayback() {
+    async function webPlayback(track) {
 
         const response = await axios.get(`${baseUrl}/getAccessToken`)
         const accessCode = response.data.authCode
@@ -78,7 +89,10 @@ export default function PlayingBar() {
                     return;
                 }
 
+
                 setTrack(state.track_window.current_track);
+                console.log(state.track_window.current_track)
+
                 setPaused(state.paused);
                 console.log(state)
                 setActive(true)
@@ -119,21 +133,21 @@ export default function PlayingBar() {
     useEffect(() => {
         let interval;
         if (!is_paused && player) {
-          interval = setInterval(() => {
-            player.getCurrentState().then((state) => {
-              if (state && !state.paused) {
-                const currentTimeInSeconds = Math.floor(state.position / 1000);
-                const minutes = Math.floor(currentTimeInSeconds / 60);
-                const seconds = currentTimeInSeconds % 60;
-                setCurrentTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
-                setTimeBar(currentTimeInSeconds)
-              }
-            });
-          }, 1000);
+            interval = setInterval(() => {
+                player.getCurrentState().then((state) => {
+                    if (state && !state.paused) {
+                        const currentTimeInSeconds = Math.floor(state.position / 1000);
+                        const minutes = Math.floor(currentTimeInSeconds / 60);
+                        const seconds = currentTimeInSeconds % 60;
+                        setCurrentTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+                        setTimeBar(currentTimeInSeconds)
+                    }
+                });
+            }, 1000);
         }
-    
+
         return () => clearInterval(interval);
-      }, [is_paused, player]);
+    }, [is_paused, player, selectedTrack]);
 
 
     // if (!is_active) {
@@ -154,10 +168,6 @@ export default function PlayingBar() {
                 <Container>
                     <p id="nowPlayingSongTittle" class="white-text">{current_track.name}</p>
                     <p id="nowPlayingSongAlbumName" class="silvery-text">{current_track.artists[0].name}</p>
-                    {/* <i
-                            id="likeSongButton"
-                            style={{ color: 'rgb(179, 179, 179)' }}
-                        ></i> */}
                 </Container>
             </Container>
             <Container id="nowplayingBarCenter">
@@ -174,7 +184,7 @@ export default function PlayingBar() {
                     <Button id="play" style={{ display: 'block' }} onClick={() => { player.togglePlay() }}>
                         {is_paused ? <PlayCircle /> : <PauseCircle />}
                     </Button>
-                    <Button id="forward" onClick={() => { player.nextTrack(); setCurrentTime(0)}}>
+                    <Button id="forward" onClick={() => { player.nextTrack(); setCurrentTime(0) }}>
                         <SkipEndCircle />
                     </Button>
                     <Button id="reapeat" style={{ color: 'rgb(179, 179, 179)' }}>
@@ -208,4 +218,5 @@ export default function PlayingBar() {
         </Container>
     )
 }
+
 // }
