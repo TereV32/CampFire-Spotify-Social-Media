@@ -21,7 +21,7 @@ Share your thoughts about songs, albums, artist and see what everyone else is th
 
 ## Screenshots
 
-![App Screenshot]()
+![App Screenshot](client/Camfire.png)
 
 
 ## Tech Stack
