@@ -5,7 +5,7 @@ const schemas = require('../routes/schemaModels')
 const { MongoClient } = require('mongoose')
 require('dotenv/config');
 
-const CLIENT_ID = process.env.CLIENT_ID
+const CLIENT_ID = process.env.CLIENT_ID || '7d3c71913d854614b41f4fe58d324e08'
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI || 'http://localhost:3000'
 
