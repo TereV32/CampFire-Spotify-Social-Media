@@ -24,6 +24,9 @@ export default function Login() {
                 console.log(respose.data.spotifyUrl)
                 window.location.href = respose.data.spotifyUrl
             }) // Initiate the login process by redirecting to the backend /login route
+            .catch((error) => {
+                console.log(error)
+            })
         console.log('running axios')
 
     }
