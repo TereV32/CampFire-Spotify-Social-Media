@@ -51,7 +51,7 @@ app.use(cors(corsOptions))
 app.use('/', spotifyRouter)
 
 //DB Connection
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log("DB Connected")
     })

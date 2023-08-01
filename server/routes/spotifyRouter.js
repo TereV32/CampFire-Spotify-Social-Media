@@ -53,6 +53,10 @@ router.post('/', (req, res) => {
     const code = req.body.code || null
     console.log("this is the code" + code)
 
+    if (!code) {
+        return res.status(400).json({ error: 'Authorization code not provided' });
+    }
+
 
     axios({
         method: 'post',
