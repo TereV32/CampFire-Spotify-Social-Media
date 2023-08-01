@@ -88,7 +88,7 @@ export default function Library() {
                             <div style={{ overflowY: 'auto' }} >
                                 <Button id='playlist-button' onClick={() => handleClick(item.id)} >
                                     <div id='playlist-div'>
-                                        <Image className='image-cover' src={item.images[0].url}></Image>
+                                        <Image id='image-cover' src={item.images[0].url}></Image>
                                         <h4 id='song-name'>{item.name}</h4>
                                     </div>
                                 </Button>

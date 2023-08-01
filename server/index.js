@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, '../client/build/index.html'));
     });
 }
+console.log(process.env.NODE_ENV)
 
 const uri = process.env.DB_URI
 
