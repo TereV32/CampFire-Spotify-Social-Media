@@ -26,13 +26,27 @@ const uri = process.env.DB_URI
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 
-const corsOption = {
-    origin: '*',
-    credentials: true,
-    optionsSuccessStatus: 200
-}
+// const corsOption = {
+//     origin: '*',
+//     credentials: true,
+//     optionsSuccessStatus: 200
+// }
+const allowedOrigins = ['https://campfire-1f3fc409de5e.herokuapp.com/'];
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      // Allow requests from the specified origins or when the origin is not provided (e.g., for local testing).
+      callback(null, true);
+    } else {
+      // Block requests from other origins.
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
 
-app.use(cors(corsOption))
+app.use(cors(corsOptions))
 app.use('/', spotifyRouter)
 
 //DB Connection
