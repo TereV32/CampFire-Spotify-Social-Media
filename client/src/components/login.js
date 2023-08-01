@@ -12,7 +12,7 @@ import {
     Form,
     Image,
 } from 'react-bootstrap'
-import baseUrl from '../config'
+import baseUrl from '../config';
 
 export default function Login() {
 
