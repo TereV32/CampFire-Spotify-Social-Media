@@ -20,6 +20,7 @@ export default function Login() {
     async function handleLogin() {
         console.log(baseUrl)
         await axios.get(`${baseUrl}/login`)
+        console.log('running axios')
             .then((respose) => {
                 window.location.href = respose.data.spotifyUrl
             }) // Initiate the login process by redirecting to the backend /login route
