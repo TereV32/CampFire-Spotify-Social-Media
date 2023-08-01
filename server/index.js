@@ -14,6 +14,7 @@ if (process.env.NODE_ENV === 'production') {
 
     // Any other routes or middleware can go here
 
+    app.use('/', spotifyRouter)
     // Catch-all route to serve the React app
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, '../client/build/index.html'));
