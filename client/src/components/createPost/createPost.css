@@ -1,0 +1,67 @@
+#centeredDiv {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* White background */
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: 0px 20px 60px #00000033;
+    height: max-content;
+    min-height: 160px;
+    /* overflow-y: hidden; */
+    /* position: relative; */
+    width: 425px;
+    padding: 35px;
+    color: rgb(2, 2, 2);
+}
+
+#dropdown-item-button {
+    display: flex;
+    margin-bottom: 6px;
+}
+
+#custom-alert {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    background-color: transparent;
+    border: transparent;
+}
+
+#playlist-button {
+    background-color: transparent;
+    border: none;
+    color: var(--gray-900);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    outline: none;
+    width: 100%;
+    height: 100%;
+}
+
+#song-list {
+    height: inherit;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    color: #1b2a29;
+    width: 100%;
+}
+
+#song-info {
+    flex-grow: 1;
+    /* If you want to add space between the elements, you can use margin-right property */
+    margin-right: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

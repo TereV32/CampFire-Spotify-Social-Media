@@ -12,6 +12,7 @@ const postSchema = new Schema({
     userID: { type: String, required: true },
     userPic: { type: String },
     content: { type: String, required: true },
+    songUrl: {type: String, required: true},
     songName: { type: String, required: true },
     songArtists: { type: String, required: true },
     songID: { type: String, required: true },

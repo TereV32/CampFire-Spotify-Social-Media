@@ -9,9 +9,9 @@ import {
     Image
 } from 'react-bootstrap'
 import { Search } from 'react-bootstrap-icons'
-import ProfilePage from '../profilePage'
-import baseUrl from '../../config'
-import '../search/searchResults.css'
+import ProfilePage from '../../profilePage'
+import './searchResults.css'
+import baseUrl from '../../../config'
 
 export default function SearchResults() {
 
@@ -87,22 +87,24 @@ export default function SearchResults() {
 
 
     return (
-        <div id='search-container' style={{ width: '100%' }}>
+        <Container id='search'>
             <Container >
                 <Row>
                     <Col sm={5} style={{ padding: '3px' }}>
-                        <Button style={{ margin: '6px' }} onClick={() => search()}>
-                            <Search />
-                        </Button>
-                        <Form.Control type="text" placeholder="Search" value={inputMusic} onChange={(e) => setInputMusic(e.target.value)} />
+                        <div id='search-div'>
+                            <Button id='search-button' onClick={() => search()}>
+                                <Search />
+                            </Button>
+                            <Form.Control type="text" placeholder="Search" value={inputMusic} onChange={(e) => setInputMusic(e.target.value)} />
+                        </div>
                     </Col>
-                </Row>
-                <Row>
                     <Col sm={5} style={{ padding: '3px' }}>
-                        <Button style={{ margin: '6px' }} onClick={() => searchUsers()}>
+                        <div id='search-div'>
+                            <Button id='search-button' onClick={() => searchUsers()}>
                             <Search />
                         </Button>
-                        <Form.Control type="text" placeholder="search users" value={inputUser} onChange={(e) => setInputUser(e.target.value)} />
+                            <Form.Control type="text" placeholder="search users" value={inputUser} onChange={(e) => setInputUser(e.target.value)} />
+                        </div>
                     </Col>
                 </Row>
             </Container>
@@ -110,31 +112,25 @@ export default function SearchResults() {
 
             <Container style={{ display: 'flex' }}>
                 <div style={{ fleex: '1' }}>
-                    <h3>Search Results</h3>
                     {searchResults?.map((result, i) => (
                         <div key={i} style={{ color: '#ffffff' }}>
-                            <Container style={{ height: 'inherit' }}>
-                                <Row style={{ display: 'flex', width: '100%' }}>
-                                    <Col id='song-col'>
-                                        <h6>{i + 1}</h6>
-                                    </Col>
-                                    <Col id='song-col' style={{ marginTop: '10px' }}>
-                                        <Image style={{ height: '5vh', width: '5vh' }} src={result.images[0].url}></Image>
-                                    </Col>
-                                    <Col id='song-col'>
-                                        <h4 style={{ marginBottom: '2px' }}>{result.name}</h4>
-                                        <h6>{result.artists[0].name}</h6>
-                                    </Col>
-                                    <Col id='song-col'>
-                                        <h6 style={{ marginTop: '42px' }}>{result.name}</h6>
-                                    </Col>
-                                </Row>
+                            <Container id='song-list' style={{ height: 'inherit' }}>
+                                <h6 style={{marginLeft: '3px'}}>{i + 1}</h6>
+                                <Image style={{ height: '5vh', width: '5vh', marginLeft: '30px' }} src={result.images[0].url}></Image>
+                                {/* <h4 style={{ marginBottom: '2px' }}>{result.name}</h4>
+                                <h6>{result.artists[0].name}</h6>
+                                <h6 style={{ marginTop: '42px' }}>{result.name}</h6> */}
+                                <div id="song-info">
+                                    <h6 id="truncate">{result.name}</h6>
+                                    <h6 id="truncate">{result.artists[0].name}</h6>
+                                    <h6>{result.name}</h6>
+                                </div>
                             </Container>
                         </div>
                     ))}
                     {userInfo?.map((result, i) => (
                         <div key={i} style={{ color: '#ffffff' }}>
-                            <Button onClick={() => { handleUserClick(result.username, result.profilePic, result.userID) }}>
+                            <Button id='user-list' onClick={() => { handleUserClick(result.username, result.profilePic, result.userID) }}>
                                 <h4>{result.username}</h4>
                                 <img src={result.profilePic} alt={result.username} width="100" height="100" />
                             </Button>
@@ -145,6 +141,6 @@ export default function SearchResults() {
             <Container style={{ flex: '1' }}>
                 <ProfilePage profile={getProfile} />
             </Container>
-        </div>
+        </Container>
     )
 }

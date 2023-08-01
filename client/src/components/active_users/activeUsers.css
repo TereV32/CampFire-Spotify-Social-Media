@@ -1,0 +1,189 @@
+#family-profile {
+    align-items: flex-start;
+    background-color: var(--shadeswhite);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    height: 801px;
+    left: 0;
+    padding: 16px 24px;
+    position: absolute;
+    top: 55px;
+    width: 173px;
+  }
+  
+#top {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    position: relative;
+    width: 100%;
+  }
+  
+#div-wrapper {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 32px;
+    position: relative;
+  }
+  
+#text-wrapper-9 {
+    align-self: stretch;
+    color: var(--neutral-500);
+    font-family: "Manrope", Helvetica;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-top: -1px;
+    position: relative;
+  }
+  
+#bottom {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    height: 591px;
+    justify-content: center;
+    position: relative;
+    width: max-content;
+  }
+  
+#user {
+    align-items: center;
+    align-self: stretch;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 4px;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+  }
+  
+#avatar-2 {
+    background-image: url(https://generation-sessions.s3.amazonaws.com/ce93e2389b2e65d52fbadc875d1277a4/img/avatar-4@2x.png);
+    background-position: 50% 50%;
+    background-size: cover;
+    border-radius: 200px;
+    height: 40px;
+    margin-bottom: -2.5px;
+    margin-right: -2px;
+    margin-top: -2.5px;
+    position: relative;
+    width: 40px;
+  }
+  
+#name {
+    align-self: stretch;
+    color: var(--neutral-800);
+    font-family: "Manrope", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 22px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+  }
+  
+#badge {
+    align-items: center;
+    background-color: var(--successgreen-50);
+    border-radius: 4px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 8px;
+    padding: 2px 10px;
+    position: relative;
+    width: 47.5px;
+  }
+  
+#text-wrapper-10 {
+    color: var(--successgreen-900);
+    font-family: ".SF Compact Rounded-Regular", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -48.75px;
+    margin-right: -48.75px;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+#img {
+    height: 40px;
+    object-fit: cover;
+    position: relative;
+    width: 40px;
+  }
+  
+#text-wrapper-11 {
+    color: var(--successgreen-900);
+    font-family: ".SF Compact Rounded-Regular", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -53.75px;
+    margin-right: -53.75px;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+#badge-2 {
+    align-items: center;
+    background-color: var(--neutral-50);
+    border-radius: 4px;
+    display: flex;
+    flex: 0 0 auto;
+    flex-direction: column;
+    gap: 8px;
+    padding: 2px 10px;
+    position: relative;
+    width: 47.5px;
+  }
+  
+#text-wrapper-12 {
+    color: var(--neutral-500);
+    font-family: ".SF Compact Rounded-Regular", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -16.25px;
+    margin-right: -16.25px;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }
+  
+#avatar-3 {
+    height: 40px;
+    position: relative;
+    width: 40px;
+  }
+  
+#text-wrapper-13 {
+    color: var(--successgreen-900);
+    font-family: ".SF Compact Rounded-Regular", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    margin-left: -61.75px;
+    margin-right: -61.75px;
+    margin-top: -1px;
+    position: relative;
+    width: fit-content;
+  }

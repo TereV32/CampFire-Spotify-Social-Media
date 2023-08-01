@@ -1,0 +1,28 @@
+#hero {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+#overlap-group-wrapper {
+    background-color: #ffffff;
+    border: 1px none;
+    height: 913px;
+    width: 1600px;
+}
+
+#overlap-group {
+    height: 867px;
+    left: 34px;
+    position: relative;
+    top: 24px;
+    width: 1539px;
+}
+
+#create-post {
+    position: fixed;
+    bottom: 90px;
+    right: 300px;
+}

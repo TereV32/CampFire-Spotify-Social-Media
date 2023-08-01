@@ -9,7 +9,6 @@ const CLIENT_ID = process.env.CLIENT_ID
 const CLIENT_SECRET = process.env.CLIENT_SECRET
 const REDIRECT_URI = process.env.REDIRECT_URI
 
-var accessToken = null
 var access_token = null
 var token_type = null
 
@@ -40,7 +39,8 @@ router.get('/login', (req, res) => {
         `redirect_uri=${REDIRECT_URI}&` +
         `state=${state}&` +
         `scope=${scope.join(
-            "%20")}&`
+            "%20")}&` +
+        `show_dialog=true&`
 
 
     res.json({
@@ -51,6 +51,8 @@ router.get('/login', (req, res) => {
 
 router.post('/', (req, res) => {
     const code = req.body.code || null
+    console.log("this is the code" + code)
+
 
     axios({
         method: 'post',
@@ -62,19 +64,23 @@ router.post('/', (req, res) => {
         }
     })
         .then(response => {
+            console.log('Response data:', response.data);
+
             if (response.status === 200) {
+                console.log('success token')
 
                 access_token = response.data.access_token
                 token_type = response.data.token_type
-
+                res.status(response.status).json({ error: 'Failed to obtain access token' });
             } else {
                 res.json(response);
             }
         })
         .catch(error => {
-            res.send(error)
+            console.error('Error:', error);
+            console.log('not success token')
+            res.status(500).json({ error: 'An error occurred while processing the request' });
         })
-    console.log(code)
 })
 
 router.get('/refresh_token', (req, res) => {
@@ -227,7 +233,7 @@ router.get('/spotifyUser', (req, res) => {
 })
 
 router.post('/savePost', (req, res) => {
-    const { name, artists, id, message, time, albumUri } = req.body
+    const { songPic, name, artists, id, message, time, albumUri } = req.body
 
     axios.get('https://api.spotify.com/v1/me', {
         headers: {
@@ -238,7 +244,7 @@ router.post('/savePost', (req, res) => {
             res.json(response.data);
             console.log(response.data)
 
-            const postData = { userID: response.data.id, userPic: response.data.images[1].url, content: message, songName: name, songArtists: artists, songID: id, timeStamp: time, albumUri: albumUri }
+            const postData = { userID: response.data.id, userPic: response.data.images[1].url, content: message, songUrl: songPic, songName: name, songArtists: artists, songID: id, timeStamp: time, albumUri: albumUri }
             console.log(postData)
             const post = new schemas.PostSchema(postData)
             try {
@@ -307,27 +313,29 @@ router.post('/queue', (req, res) => {
 
 
 router.put('/playSong', (req, res) => {
-    const {trackID, albumId } = req.body
+    const { trackID, albumId } = req.body
     console.log(trackID + albumId)
     const data = {
-        context_uri: `${albumId}`,
-        uris: [`${trackID}`],
+        context_uri: albumId,
+        uris: [trackID],
         offset: {
-            position: 5,
+            uri: trackID,
         },
         position_ms: 0,
     };
-    axios.put(`https://api.spotify.com/v1/me/player/play`, data,
-        {
-            headers: {
-                Authorization: `${token_type} ${access_token}`
-            }
-        })
+    axios.put(`https://api.spotify.com/v1/me/player/play`, data, {
+        headers: {
+            Authorization: `${token_type} ${access_token}`,
+            'Content-Type': 'application/json'
+        }
+    })
         .then((response) => {
             console.log('Track is now playing:', response.data);
         })
         .catch((error) => {
+            console.log(error)
             console.error('Error playing the track:', error);
+            res.status(500).json({ error: 'Error playing the track' });
         });
 })
 
@@ -344,6 +352,45 @@ router.get('/usersPlaylist', (req, res) => {
         })
         .catch(error => {
             res.json(error);
+        });
+})
+
+router.get('/getDevices', (req, res) => {
+    axios.get("https://api.spotify.com/v1/me/player/devices", {
+        headers: {
+            Authorization: `${token_type} ${access_token}`
+        }
+    })
+        .then(response => {
+            res.json(response.data);
+            console.log(response.data)
+        })
+        .catch(error => {
+            res.json(error);
+        });
+})
+
+router.put('/transferDevice', (req, res) => {
+    const { deviceID } = req.body
+    console.log(deviceID)
+    const data = {
+        device_ids: [deviceID],
+    }
+    axios.put("https://api.spotify.com/v1/me/player", data, {
+        headers: {
+            Authorization: `${token_type} ${access_token}`
+        }
+    })
+        .then(response => {
+            res.json(response.data);
+            console.log(response.data)
+            console.log('success')
+        })
+        .catch(error => {
+            console.log(error)
+            res.json(error);
+            console.log('no success')
+
         });
 })
 

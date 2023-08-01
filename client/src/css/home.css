@@ -2,11 +2,11 @@
     display: flex;
     margin-left: -7px;
     height: 100vh;
-    background-color: #020202;
+    background-color: #EBEFD5;
 }
 
 .profile-bar {
-    width: 13%;
+    width: 100%;
 }
 
 .main-body {
@@ -14,6 +14,10 @@
     flex: 1;
     flex-direction: row;
     background-color: #d61313;
+}
+
+#main-content {
+    padding: 0 15px;
 }
 
 .library-body {

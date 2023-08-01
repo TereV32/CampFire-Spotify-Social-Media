@@ -1,11 +1,16 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
 import {
     Container,
     Row,
     Col,
     Card,
     Button,
+    InputGroup,
+    FormCheck,
+    Form,
+    Image,
 } from 'react-bootstrap'
 import baseUrl from '../config'
 
@@ -21,39 +26,35 @@ export default function Login() {
     }
 
     return (
-        <Container fluid className='p-4' style={{ backgroundColor: '#222529', height: '100vh' }}>
-
-            <Row>
-
-                {/* Description of application */}
-                <Col md='6' className='align-center d-flex flex-column justify-content-center'>
-                    <h1 style={{ color: '#eaefd2' }}>
+        <Container fluid className='p-4' style={{ backgroundColor: '#ffffff', height: '100vh' }}>
+            <Row >
+                <Col md='6' className='text-center text-md-start d-flex flex-column justify-content-center'>
+                    <h1 className='my-5 display-3 fw-bold ls-tight px-3' style={{ color: '#020304' }}>
                         Camp
                         <span style={{ color: '#ef700e' }}>Fire</span>
                     </h1>
-
-                    <p style={{ color: '#eaefd2' }}>
-                        Connect with friends and others through music. See what everyone is listening to.
+                    <p className='px-3' style={{ color: 'hsl(217, 10%, 50.8%)' }}>
+                        Connect with friends and others through music. See what everyone is listening to. <br />
                         Share your thoughts about songs, albums, artist and see what everyone else is thinking of.
                     </p>
-
                 </Col>
 
-                {/* Spotify Login/*/}
-
-                <Col col='4' md='6'>
-                    <Card className='my-5'>
+                <Col md='6'>
+                    <Card className='my-5' style={{ backgroundColor: '#ffffff', border: 'transparent' }}>
                         <Card.Body className='p-5'>
-                            {/* <a href={spotifyLogin}> */}
-                            {/* <a href={url}> */}
-                            <Button className="mb-4 w-100" size="lg" style={{ backgroundColor: '#3b5998' }} onClick={handleLogin}>
-                                Continue with spotify
-                            </Button>
-                            {/* </a> */}
+                            <Form>
+                                <Row className='mb-4'>
+                                    <Col>
+                                        <Image src={require('../assets/Spotify_Logo_CMYK_Green.png')} style={{ width: 'inherit' }} />
+                                    </Col>
+                                </Row>
+                                <Button className='w-32 mb-4' size='md' style={{ backgroundColor: '#020304', color: '#FFFFFF', fontSize: '30px' }} onClick={handleLogin}>
+                                    Sign in
+                                </Button>
+                            </Form>
                         </Card.Body>
                     </Card>
                 </Col>
-
             </Row>
         </Container>
     );

@@ -21,9 +21,6 @@ export default function ProfilePage(profile) {
                 <Col>
                     <Image src={profile.profile.picture} />
                     <h1 style={{ color: '#ffffff' }}>{profile.profile.displayName}</h1>
-                    post#
-                    followers
-                    following
                 </Col>
                 <Col>
                     <ListGroup id='library-group'>
